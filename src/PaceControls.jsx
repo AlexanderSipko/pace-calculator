@@ -48,11 +48,19 @@ export default function PaceControls({
   // }, [circle])
 
   return (
-    <div className="space-y-4 mt-1 mb-1">
+    <div className="space-y-4 relative mt-1 mb-1">
       {/* Дистанция */}
-      
+      <div className="flex gap-4 absolute right-1 justify-center items-center mb-2">
+        <img src="./icons8-run-32.png" alt="Описание" className="w-4 h-4 opacity-80" />
+        <h1 className="
+          text-1xl font-semibold text-center m-0 flex justify-center
+          bg-gradient-to-r from-purple-300 via-purple-500 to-purple-600 bg-clip-text text-transparent
+        ">расчет темпа 
+          <span className="text-gray-300 ml-2 text-[10px]">{import.meta.env.VITE_MODE}</span>
+        </h1>
+      </div>
       <div className="
-        bg-gray-50 shadow-md rounded-lg p-2 space-y-2
+        bg-gray-50 shadow-md rounded-lg p-2 space-y-2 mb-2
         ">
         <label className="font-semibold bg-gradient-to-r from-gray-400 to-gray-400 via-gray-400 bg-clip-text text-transparent">дистанция:</label>
         {/* <span className="text-lime-600 flex text-[11px] p-0">*круг {circle} метров</span> */}

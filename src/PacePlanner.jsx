@@ -104,17 +104,7 @@ export default function PacePlanner() {
 
   return (
     <div className="max-w-3xl mx-auto p-1 space-y-6 text-gray-900 mt-1 mb-1">
-      
-      <div className="flex gap-4 justify-center items-center mb-2">
-        <img src="./icons8-run-32.png" alt="Описание" className="w-4 h-4 opacity-80" />
-        <h1 className="
-          text-1xl font-semibold text-center m-0 flex justify-center
-          bg-gradient-to-r from-purple-300 via-purple-500 to-purple-600 bg-clip-text text-transparent
-        ">расчет темпа 
-          <span className="text-gray-300 ml-2 text-[10px]">{import.meta.env.VITE_MODE}</span>
-        </h1>
-      </div>
-      
+
       <PaceControls
         distance={distance} setDistance={setDistance}
         customDistance={customDistance} setCustomDistance={setCustomDistance}
