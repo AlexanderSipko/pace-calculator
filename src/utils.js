@@ -18,10 +18,13 @@ export function formatTime(secsRaw, mode = "round") {
   const h = Math.floor(secs / 3600);
   const m = Math.floor((secs % 3600) / 60);
   const s = secs % 60;
-  return `${h > 0 ? String(h).padStart(2, "0") + ":" : ""}${String(m).padStart(
-    2,
-    "0"
-  )}:${String(s).padStart(2, "0")}`;
+
+  // Форматируем компоненты времени
+  const hours = h > 0 ? `${h}:` : "";
+  const minutes = h > 0 ? String(m).padStart(2, "0") : String(m);
+  const seconds = String(s).padStart(2, "0");
+
+  return `${hours}${minutes}:${seconds}`;
 }
 
 // Делим дистанцию на километры

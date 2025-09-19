@@ -22,8 +22,9 @@ export default function PaceControls({
     { label: "2000 м - 5 кругов", value: 2 },
     { label: "3000 м - 7.5 кругов", value: 3 },
     { label: "5 км - 12.5 круга", value: 5 },
+    { label: "6 км - 15 кругов", value: 6 },
     { label: "10 км - 25 кругов", value: 10 },
-    { label: "Полумарафон 21.1 км ~52.75 круга", value: 21.097 },
+    { label: "Полумарафон 21.097 км ~52.75 круга", value: 21.097 },
     { label: "Марафон 42.195 км ~105.5 круга", value: 42.195 },
   ];
 
@@ -42,21 +43,25 @@ export default function PaceControls({
   };
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [circle])
+  // }, [circle])
 
   return (
     <div className="space-y-4 mt-1 mb-1">
       {/* Дистанция */}
       
-      <div className="bg-gray-50 shadow-md rounded-lg p-2 space-y-2">
-        <label className="font-semibold text-gray-400">Выбор дистанции:</label>
-        <span className="text-lime-600 flex text-[11px] p-0">*круг {circle} метров</span>
-        <div className="flex gap-2 justify-center">
+      <div className="
+        bg-gray-50 shadow-md rounded-lg p-2 space-y-2
+        ">
+        <label className="font-semibold bg-gradient-to-r from-gray-400 to-gray-400 via-gray-400 bg-clip-text text-transparent">дистанция:</label>
+        {/* <span className="text-lime-600 flex text-[11px] p-0">*круг {circle} метров</span> */}
+        <div className="flex gap-2 justify-center items-center">
           <div className="w-full">
             <select
-              className="border border-gray-300 rounded-md p-2 w-full focus:ring-2 focus:ring-gray-400"
+              className="border border-gray-300 rounded-md p-2 w-full
+              focus:border-gray-300
+              focus:ring-2 focus:ring-gray-400"
               onChange={(e) => setDistance(parseFloat(e.target.value))}
               value={distance}
             >
@@ -66,47 +71,55 @@ export default function PaceControls({
               <option value={customDistance}>Свободный ввод</option>
             </select>
           </div>
+          <div className="p-0 m-0 flex justify-end">
+              <button
+              onClick={() => (setCustomDistance(0), setDistance(0))}
+              className={`px-2 py-2 rounded-md font-medium bg-red-400 text-white  text-gray-900"}`}
+              >очистить</button>
+            </div>
         </div>
        
 
         {distance === customDistance && (
-          <>
-          <div className="flex gap-2 mt-2">
-          {/* Целые км */}
-          <select
-            className="border border-gray-300 rounded-md p-2 w-1/2 focus:ring-2 focus:ring-gray-400"
-            value={Math.floor(customDistance)}
-            onChange={(e) => {
-              const whole = parseInt(e.target.value, 10);
-              const fraction = customDistance - Math.floor(customDistance);
-              const val = whole + fraction;
-              setCustomDistance(val);
-              setDistance(val);
-            }}
-          >
-            {Array.from({ length: 100 }, (_, i) => (
-              <option key={i} value={i}>{i} км</option>
-            ))}
-          </select>
-        
-          {/* Метры */}
-          <select
-            className="border border-gray-300 rounded-md p-2 w-1/2 focus:ring-2 focus:ring-gray-400"
-            value={Math.round((customDistance - Math.floor(customDistance)) * 1000)}
-            onChange={(e) => {
-              const meters = parseInt(e.target.value, 10);
-              const whole = Math.floor(customDistance);
-              const val = whole + meters / 1000;
-              setCustomDistance(val);
-              setDistance(val);
-            }}
-          >
-            {Array.from({ length: 1001 }, (_, i) => i).map((m) => (
-              <option key={m} value={m}>{m} м</option>
-            ))}
-          </select>
-        </div>
-          </>
+          <div className="flex flex-col justify-center">
+            <div className="flex gap-2 mt-2">
+            {/* Целые км */}
+            <select
+              className="border border-gray-300 rounded-md p-2 w-1/2 focus:ring-2 focus:ring-gray-400"
+              value={Math.floor(customDistance)}
+              onChange={(e) => {
+                const whole = parseInt(e.target.value, 10);
+                const fraction = customDistance - Math.floor(customDistance);
+                const val = whole + fraction;
+                setCustomDistance(val);
+                setDistance(val);
+              }}
+            >
+              {Array.from({ length: 151 }, (_, i) => (
+                <option key={i} value={i}>{i} км</option>
+              ))}
+            </select>
+            
+          
+            {/* Метры */}
+            <select
+              className="border border-gray-300 rounded-md p-2 w-1/2 focus:ring-2 focus:ring-gray-400"
+              value={Math.round((customDistance - Math.floor(customDistance)) * 1000)}
+              onChange={(e) => {
+                const meters = parseInt(e.target.value, 10);
+                const whole = Math.floor(customDistance);
+                const val = whole + meters / 1000;
+                setCustomDistance(val);
+                setDistance(val);
+              }}
+            >
+              {Array.from({ length: 1001 }, (_, i) => i).map((m) => (
+                <option key={m} value={m}>{m} м</option>
+              ))}
+            </select>
+            </div>
+            
+          </div>
         )}
       </div>
 
@@ -123,6 +136,8 @@ export default function PaceControls({
             className={`px-2 py-1 rounded-md font-medium ${mode === "pace" ? "bg-gray-600 text-white" : "bg-gray-200 text-gray-900"}`}
           >По темпу</button>
         </div>
+
+
 
         {mode === "time" ? (
           <div className="flex gap-1">
