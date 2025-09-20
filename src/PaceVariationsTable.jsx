@@ -71,8 +71,14 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
 
   const handlePrint = () => {
     const printContents = tableRef.current.innerHTML;
-    const newWindow = window.open("", "", "width=800,height=600");
-    newWindow.document.write(`
+    const iframe = document.createElement("iframe");
+    iframe.style.position = "absolute";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "none";
+    document.body.appendChild(iframe);
+  
+    iframe.contentDocument.write(`
       <html>
         <head>
           <title>Таблица темпов</title>
@@ -88,10 +94,14 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
         </body>
       </html>
     `);
-    newWindow.document.close();
-    newWindow.focus();
-    newWindow.print();
-    newWindow.close();
+  
+    iframe.contentDocument.close();
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+  
+    setTimeout(() => {
+      document.body.removeChild(iframe);
+    }, 1000);
   };
 
   const moreThenTargetSeconds = (secondTimer, secondTarget) => {
