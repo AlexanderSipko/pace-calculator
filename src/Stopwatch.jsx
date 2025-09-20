@@ -85,13 +85,23 @@ export default function Stopwatch({time, setTime}) {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
     const centiseconds = Math.floor((ms % 1000) / 10);
-    
-    if (hours > 0) {
-        return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${String(centiseconds).padStart(2, "0")}`;
-    } else {
-        return `${minutes}:${String(seconds).padStart(2, "0")}.${String(centiseconds).padStart(2, "0")}`;
+  
+    // Если прошло больше 5 минут — показываем без миллисекунд
+    if (ms >= 5 * 60 * 1000) {
+      if (hours > 0) {
+        return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+      } else {
+        return `${minutes}:${String(seconds).padStart(2, "0")}`;
+      }
     }
-};
+  
+    // Иначе показываем с миллисекундами
+    if (hours > 0) {
+      return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${String(centiseconds).padStart(2, "0")}`;
+    } else {
+      return `${minutes}:${String(seconds).padStart(2, "0")}.${String(centiseconds).padStart(2, "0")}`;
+    }
+  };
 
   const reset = () => {
     setIsRunning(false);
