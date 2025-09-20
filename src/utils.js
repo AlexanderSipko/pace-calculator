@@ -7,24 +7,21 @@ export function parseTime(timeStr) {
   return Number(parts[0]) || 0;
 }
 
-export function formatTime(secsRaw, mode = "round") {
+export function formatTime(secsRaw) {
   if (isNaN(secsRaw) || secsRaw < 0) return "--:--";
-
-  let secs;
-  if (mode === "floor") secs = Math.floor(secsRaw);
-  else if (mode === "ceil") secs = Math.ceil(secsRaw);
-  else secs = Math.round(secsRaw);
-
+  
+  // Округляем до целой секунды как Strava
+  const secs = Math.round(secsRaw);
+  
   const h = Math.floor(secs / 3600);
   const m = Math.floor((secs % 3600) / 60);
   const s = secs % 60;
 
-  // Форматируем компоненты времени
-  const hours = h > 0 ? `${h}:` : "";
-  const minutes = h > 0 ? String(m).padStart(2, "0") : String(m);
-  const seconds = String(s).padStart(2, "0");
-
-  return `${hours}${minutes}:${seconds}`;
+  if (h > 0) {
+    return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  } else {
+    return `${m}:${String(s).padStart(2, "0")}`;
+  }
 }
 
 // Делим дистанцию на километры
@@ -69,4 +66,19 @@ export function calculateIntervals(avgPacePerKmSec, intervalDistances = [0.1, 0.
     timeSec: avgPacePerKmSec * d,
     timeFormatted: formatTime(avgPacePerKmSec * d, "round"),
   }));
+}
+
+
+export function tempFormat (timeSeconds, mode='time') {
+
+  const min = Math.floor(timeSeconds / 60)
+
+  let sec = Math.round(timeSeconds % 60)
+  // if (mode==='pace') {
+  //   sec = Math.round(timeSeconds % 60)
+  // } else {
+  //   sec = Math.floor(timeSeconds % 60)
+  // }
+
+  return `${min}${':'}${String(sec).padStart(2, "0")}`
 }

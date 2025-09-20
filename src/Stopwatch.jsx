@@ -10,7 +10,7 @@ export default function Stopwatch({time, setTime}) {
   let local_store_suffix = import.meta.env.VITE_MODE
   local_store_suffix = local_store_suffix === undefined ? '_dev' : local_store_suffix
   const local_store_key = "stopwatch" + local_store_suffix
-  console.log(local_store_key)
+  // console.log(local_store_key)
 
   // загрузка из localStorage
   useEffect(() => {
@@ -81,11 +81,17 @@ export default function Stopwatch({time, setTime}) {
 
   const formatTime = (ms) => {
     const totalSeconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
     const centiseconds = Math.floor((ms % 1000) / 10);
-    return `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}.${String(centiseconds).padStart(2,"0")}`;
-  };
+    
+    if (hours > 0) {
+        return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${String(centiseconds).padStart(2, "0")}`;
+    } else {
+        return `${minutes}:${String(seconds).padStart(2, "0")}.${String(centiseconds).padStart(2, "0")}`;
+    }
+};
 
   const reset = () => {
     setIsRunning(false);

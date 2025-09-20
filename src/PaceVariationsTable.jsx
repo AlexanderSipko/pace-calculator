@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { formatTime } from "./utils";
+import { formatTime, tempFormat } from "./utils";
 
 export default function PaceVariationsTable({ basePaceSec, distance, time }) {
   const [deltas, setDeltas] = useState([-8, -4, 0, 4, 8]);
@@ -123,14 +123,16 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
         <table className="min-w-full border-collapse border border-green-400 text-sm">
           <thead className="bg-gray-600">
             <tr className="bg-gray-600">
-              <th className="border border-gray-100 p-1 text-gray-200">km</th>
+              <th className="border border-gray-100 p-1 text-gray-200 w-1 h-10">Km</th>
               {paces.map((p, i) => {
+                const totalTime = p * distance;
                 const isMiddle = i === Math.floor(paces.length / 2);
+
                 return (
                   <th
                     key={i}
                     className={`
-                        border border-gray-100 py-1 text-gray-200
+                        border border-gray-100 py-1 text-gray-200 relative
                         ${
                           isMiddle
                             ? "text-gray-900 bg-[#9EE539] border-2 border-gray-800"
@@ -138,8 +140,19 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
                         }
                         `}
                   >
-                    {Math.floor(p / 60)}:
-                    {String(Math.floor(p % 60)).padStart(2, "0")}
+                    <span className="absolute bottom-0 right-1 after:content-['/км'] after:text-[10px] after:opacity-55" >
+                      {tempFormat(p )}
+                    </span>
+                    <span className="text-[8px] text-gray-600">-</span>
+                    <span className={`block text-[14px] absolute top-0 left-2
+                      ${
+                        isMiddle
+                          ? "text-gray-600"
+                          : "text-gray-400"
+                      }
+                    `}>
+                      {formatTime(totalTime)}
+                    </span>
                   </th>
                 );
               })}
@@ -182,13 +195,33 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
                         ${moreThenTargetSeconds(time / 1000, p * d) ? "bg-red-200 font-bold" : ""}
                         `}
                       >
-                        {formatTime(Math.round(p * d), "floor")}
+                        {formatTime(p * d)}
                         {/* {moreThenTargetSeconds(time / 1000, p * d)} */}
                       </td>
                     );
                   })}
                 </tr>
+                
               ))}
+              <tr className="bg-gray-600">
+            <td className="border border-gray-100 p-1 text-gray-200"></td>
+            {paces.map((p, i) => {
+              const totalTime = p * distance; // Финальное время для всей дистанции
+              return (
+                <th key={i} className="border border-gray-100 py-1 text-gray-200 relative h-10">
+                  <span className={`block text-[14px] absolute top-0 left-2 text-gray-400`}>
+                      {formatTime(totalTime)} 
+                    </span>
+                    <span className="text-[8px] text-gray-600">-</span>
+                  <span className="absolute bottom-0 right-1 after:content-['/км'] after:text-[10px] after:opacity-55" >
+                      {tempFormat(p )}
+                    </span>
+                    
+                    
+                </th>
+              );
+            })}
+          </tr>
           </tbody>
         </table>
       </div>
