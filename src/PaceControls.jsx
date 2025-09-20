@@ -21,11 +21,11 @@ export default function PaceControls({
     { label: "1800 м - 4.2 круга", value: 1.8 },
     { label: "2000 м - 5 кругов", value: 2 },
     { label: "3000 м - 7.5 кругов", value: 3 },
-    { label: "5 км - 12.5 круга", value: 5 },
-    { label: "6 км - 15 кругов", value: 6 },
-    { label: "10 км - 25 кругов", value: 10 },
-    { label: "Полумарафон 21.097 км ~52.75 круга", value: 21.097 },
-    { label: "Марафон 42.195 км ~105.5 круга", value: 42.195 },
+    { label: "5000 км - 12.5 круга", value: 5 },
+    { label: "6000 км - 15 кругов", value: 6 },
+    { label: "10 км", value: 10 },
+    { label: "Полумарафон 21.097 км", value: 21.097 },
+    { label: "Марафон 42.195 км", value: 42.195 },
   ];
 
   // Для режима времени — разбор targetTime на часы, минуты, секунды
@@ -82,7 +82,7 @@ export default function PaceControls({
           <div className="p-0 m-0 flex justify-end">
               <button
               onClick={() => (setCustomDistance(0), setDistance(0))}
-              className={`px-2 py-2 rounded-md font-medium bg-red-400 text-white  text-gray-900"}`}
+              className={`px-2 py-2 rounded-md font-medium bg-red-200 hover:bg-red-400 text-white  text-gray-900"}`}
               >очистить</button>
             </div>
         </div>
@@ -137,11 +137,15 @@ export default function PaceControls({
         <div className="flex gap-1 mb-1 justify-around">
           <button
             onClick={() => setMode("time")}
-            className={`px-2 py-1 rounded-md font-medium ${mode === "time" ? "bg-gray-600 text-white" : "bg-gray-200 text-gray-900"}`}
+            className={`
+            px-2 py-1 rounded-md font-medium w-1/2
+            ${mode === "time" ? "bg-gray-600 text-white" : "bg-gray-200 text-gray-900"}`}
           >По времени</button>
           <button
             onClick={() => setMode("pace")}
-            className={`px-2 py-1 rounded-md font-medium ${mode === "pace" ? "bg-gray-600 text-white" : "bg-gray-200 text-gray-900"}`}
+            className={`
+            px-2 py-1 rounded-md font-medium w-1/2
+            ${mode === "pace" ? "bg-gray-600 text-white" : "bg-gray-200 text-gray-900"}`}
           >По темпу</button>
         </div>
 

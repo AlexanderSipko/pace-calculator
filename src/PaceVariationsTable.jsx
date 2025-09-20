@@ -123,7 +123,7 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
         <table className="min-w-full border-collapse border border-green-400 text-sm">
           <thead className="bg-gray-600">
             <tr className="bg-gray-600">
-              <th className="border border-gray-100 p-1 text-gray-200 w-1 h-10">Km</th>
+              <th className="border border-gray-100 p-1 text-gray-200 w-15 h-10">Km</th>
               {paces.map((p, i) => {
                 const totalTime = p * distance;
                 const isMiddle = i === Math.floor(paces.length / 2);
@@ -208,11 +208,11 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
             {paces.map((p, i) => {
               const totalTime = p * distance; // Финальное время для всей дистанции
               return (
-                <th key={i} className="border border-gray-100 py-1 text-gray-200 relative h-10">
-                  <span className={`block text-[14px] absolute top-0 left-2 text-gray-400`}>
+                <th key={i} className="border border-gray-100 py-1 text-gray-200 relative h-6">
+                  {/* <span className={`block text-[14px] absolute top-0 left-2 text-gray-400`}>
                       {formatTime(totalTime)} 
                     </span>
-                    <span className="text-[8px] text-gray-600">-</span>
+                    <span className="text-[8px] text-gray-600">-</span> */}
                   <span className="absolute bottom-0 right-1 after:content-['/км'] after:text-[10px] after:opacity-55" >
                       {tempFormat(p )}
                     </span>

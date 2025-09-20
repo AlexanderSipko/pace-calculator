@@ -120,8 +120,8 @@ export default function Stopwatch({time, setTime}) {
       <div className="flex justify-center gap-4 m-0 p-0">
         <button
           onClick={reset}
-          className={`px-3 py-1 text-white rounded hover:bg-red-600 ${
-            time === 0 ? "bg-gray-400" : "bg-red-400"
+          className={`px-3 py-1 text-white rounded hover:bg-red-600 w-1/2 ${
+            time === 0 ? "bg-gray-200" : "bg-red-400"
           }`}
           disabled={time === 0}
         >
@@ -130,7 +130,7 @@ export default function Stopwatch({time, setTime}) {
         <div className="text-2xl font-mono mb-1">{formatTime(time)}</div>
         <button
           onClick={toggle}
-          className={`px-3 py-1 rounded text-gray-600 font-semibold ${
+          className={`px-3 py-1 rounded text-gray-600 font-semibold w-1/2 ${
             isRunning
               ? "bg-yellow-500 hover:bg-yellow-600"
               : "bg-[#9EE539] hover:bg-green-600"
