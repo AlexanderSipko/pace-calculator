@@ -10,7 +10,7 @@ export default function Stopwatch({time, setTime}) {
   let local_store_suffix = import.meta.env.VITE_MODE
   local_store_suffix = local_store_suffix === undefined ? '_dev' : local_store_suffix
   const local_store_key = "stopwatch" + local_store_suffix
-  console.log(local_store_key)
+  // console.log(local_store_key)
 
   // загрузка из localStorage
   useEffect(() => {
