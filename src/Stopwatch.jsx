@@ -7,9 +7,16 @@ export default function Stopwatch({time, setTime}) {
   const intervalsRef = useRef([]); // массив интервалов {start, end|null}
   const intervalRef = useRef(null);
 
+  let local_store_suffix = import.meta.env.VITE_MODE
+  local_store_suffix = local_store_suffix === undefined ? '_dev' : local_store_suffix
+  const local_store_key = "stopwatch" + local_store_suffix
+  console.log(local_store_key)
+
   // загрузка из localStorage
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("stopwatch")) || [];
+    
+    const saved = JSON.parse(localStorage.getItem(local_store_key)) || [];
+    // console.log(saved, import.meta.env.VITE_MODE || '_dev')
     intervalsRef.current = saved;
     const total = computeTotalTime(saved);
     if (total >= 24 * 60 * 60 * 1000) {
@@ -23,7 +30,7 @@ export default function Stopwatch({time, setTime}) {
 
   // сохраняем в localStorage
   useEffect(() => {
-    localStorage.setItem("stopwatch", JSON.stringify(intervalsRef.current));
+    localStorage.setItem(local_store_key, JSON.stringify(intervalsRef.current));
   }, [time, isRunning]);
 
   // интервал тика
@@ -84,7 +91,7 @@ export default function Stopwatch({time, setTime}) {
     setIsRunning(false);
     setTime(0);
     intervalsRef.current = [];
-    localStorage.removeItem("stopwatch");
+    localStorage.removeItem(local_store_key);
   };
 
   const toggle = () => {
