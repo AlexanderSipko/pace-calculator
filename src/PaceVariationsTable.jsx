@@ -167,13 +167,13 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
                       <td
                         key={j}
                         className={`
-                        border border-gray-400 p-1 text-center relative
+                        border border-gray-400 p-1 text-center
                         ${isMiddle ? "text-gray-900 bg-[#9EE539] text-[16px]" : ""}
                         ${moreThenTargetSeconds(time / 1000, p * d) ? "bg-red-200 font-bold" : ""}
                         `}
                       >
                         {formatTime(Math.round(p * d), "floor")}
-                        {moreThenTargetSeconds(time / 1000, p * d)}
+                        {/* {moreThenTargetSeconds(time / 1000, p * d)} */}
                       </td>
                     );
                   })}
