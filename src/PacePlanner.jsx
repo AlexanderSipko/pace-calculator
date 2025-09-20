@@ -1,11 +1,14 @@
 // PacePlanner.jsx
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import PaceControls from "./PaceControls";
 import { parseTime, formatTime, calculateSplits, calculateIntervals } from "./utils";
 import PaceVariationsTable from "./PaceVariationsTable";
 import TargetInfo from "./TargetInfo";
+import Stopwatch from "./Stopwatch";
+
 
 export default function PacePlanner() {
+  const [time, setTime] = useState(0); // миллисекунды
   const [distance, setDistance] = React.useState(0.8); // пример: 200 м
   const [customDistance, setCustomDistance] = React.useState(0.8);
   const [circle, setCircle] = React.useState(400); // пример: 400 м
@@ -117,7 +120,10 @@ export default function PacePlanner() {
 
       <div ref={tableRef} className="mt-2 mb-1">
         <TargetInfo avgPacePerKm={avgPacePerKm} totalSeconds={totalSeconds} distance={distance} />
-        <PaceVariationsTable basePaceSec={avgPacePerKm} distance={distance} />
+        <div className="mt-4">
+        <Stopwatch time={time} setTime={setTime} />
+      </div>
+        <PaceVariationsTable basePaceSec={avgPacePerKm} distance={distance} time={time} />
       </div>
 
       {/* <div className="text-center mt-2">
