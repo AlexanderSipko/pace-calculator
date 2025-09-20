@@ -143,7 +143,11 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
                     <span className="absolute bottom-0 right-1 after:content-['/км'] after:text-[10px] after:opacity-55" >
                       {tempFormat(p )}
                     </span>
-                    <span className="text-[8px] text-gray-600">-</span>
+                    <span className={`text-[8px]  ${
+                          isMiddle
+                            ? "text-[#9EE539]"
+                            : "text-gray-600"
+                        }`}>-</span>
                     <span className={`block text-[14px] absolute top-0 left-2
                       ${
                         isMiddle
