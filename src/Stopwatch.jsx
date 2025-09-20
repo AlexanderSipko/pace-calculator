@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export default function Stopwatch() {
-  const [time, setTime] = useState(0);
+export default function Stopwatch({time, setTime}) {
+//   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
   const intervalsRef = useRef([]); // массив интервалов {start, end|null}
