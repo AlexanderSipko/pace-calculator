@@ -3,12 +3,12 @@
     "name": "Pace Calculator",
     "icons": [
       {
-        "src": "/icons8-run-32.ico",
+        "src": "/runer-silhouette-running-fast.png",
         "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": "/icons8-run-32.ico",
+        "src": "/runer-silhouette-running-fast.png",
         "type": "image/png",
         "sizes": "512x512"
       }
