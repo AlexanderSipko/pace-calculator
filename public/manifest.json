@@ -1,6 +1,6 @@
 {
-    "short_name": "PaceApp",
-    "name": "Pace Calculator",
+    "short_name": "paceRUN",
+    "name": "Pace Run Calculator",
     "icons": [
       {
         "src": "/runer-silhouette-running-fast.png",
