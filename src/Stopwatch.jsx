@@ -1,22 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
+import {formatTimeStopWatch } from './utils'
 
 export default function Stopwatch({time, setTime}) {
-//   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
-  const intervalsRef = useRef([]); // массив интервалов {start, end|null}
+  const intervalsRef = useRef([]);
   const intervalRef = useRef(null);
 
   let local_store_suffix = import.meta.env.VITE_MODE
   local_store_suffix = local_store_suffix === undefined ? '_dev' : local_store_suffix
   const local_store_key = "stopwatch" + local_store_suffix
-  // console.log(local_store_key)
 
-  // загрузка из localStorage
+
   useEffect(() => {
     
     const saved = JSON.parse(localStorage.getItem(local_store_key)) || [];
-    // console.log(saved, import.meta.env.VITE_MODE || '_dev')
     intervalsRef.current = saved;
     const total = computeTotalTime(saved);
     if (total >= 24 * 60 * 60 * 1000) {
@@ -28,12 +26,10 @@ export default function Stopwatch({time, setTime}) {
     }
   }, []);
 
-  // сохраняем в localStorage
   useEffect(() => {
     localStorage.setItem(local_store_key, JSON.stringify(intervalsRef.current));
   }, [time, isRunning]);
 
-  // интервал тика
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
@@ -50,7 +46,6 @@ export default function Stopwatch({time, setTime}) {
     return () => clearInterval(intervalRef.current);
   }, [isRunning]);
 
-  // синхронизация при возвращении на вкладку
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === "visible") {
@@ -79,30 +74,7 @@ export default function Stopwatch({time, setTime}) {
     return total;
   };
 
-  const formatTime = (ms) => {
-    const totalSeconds = Math.floor(ms / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    const centiseconds = Math.floor((ms % 1000) / 10);
-  
-    // Если прошло больше 5 минут — показываем без миллисекунд
-    if (ms >= 5 * 60 * 1000) {
-      if (hours > 0) {
-        return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-      } else {
-        return `${minutes}:${String(seconds).padStart(2, "0")}`;
-      }
-    }
-  
-    // Иначе показываем с миллисекундами
-    if (hours > 0) {
-      return `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}.${String(centiseconds).padStart(2, "0")}`;
-    } else {
-      return `${minutes}:${String(seconds).padStart(2, "0")}.${String(centiseconds).padStart(2, "0")}`;
-    }
-  };
-
+ 
   const reset = () => {
     setIsRunning(false);
     setTime(0);
@@ -126,8 +98,9 @@ export default function Stopwatch({time, setTime}) {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-1 w-full text-center">
+    <div className="bg-gray-50 mt-2 rounded-lg p-0 w-full text-center">
       <div className="flex justify-center gap-4 m-0 p-0">
+
         <button
           onClick={reset}
           className={`px-3 py-1 text-white rounded hover:bg-red-600 w-1/2 ${
@@ -137,7 +110,7 @@ export default function Stopwatch({time, setTime}) {
         >
           сброс
         </button>
-        <div className="text-2xl font-mono mb-1">{formatTime(time)}</div>
+        <div className="text-2xl font-mono mb-1">{formatTimeStopWatch(time)}</div>
         <button
           onClick={toggle}
           className={`px-3 py-1 rounded text-gray-600 font-semibold w-1/2 ${
@@ -152,3 +125,4 @@ export default function Stopwatch({time, setTime}) {
     </div>
   );
 }
+

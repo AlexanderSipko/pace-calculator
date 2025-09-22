@@ -111,11 +111,10 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
     return null
   }
 
+  const isMiddle = (i, paces) => i === Math.floor(paces.length / 2);
+
   return (
     <div>
-
-
-      {/* Таблица */}
       <div
         ref={tableRef}
         className="bg-gray-100 shadow-md rounded-lg p-1 overflow-auto mt-1"
@@ -126,15 +125,13 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
               <th className="border border-gray-100 p-1 text-gray-200 w-10 h-10">Km</th>
               {paces.map((p, i) => {
                 const totalTime = p * distance;
-                const isMiddle = i === Math.floor(paces.length / 2);
-
                 return (
                   <th
                     key={i}
                     className={`
                         border border-gray-100 py-1 text-gray-200 relative
                         ${
-                          isMiddle
+                          isMiddle(i, paces)
                             ? "text-gray-900 bg-[#9EE539] border-2 border-gray-800"
                             : ""
                         }
@@ -144,13 +141,13 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
                       {tempFormat(p )}
                     </span>
                     <span className={`text-[8px]  ${
-                          isMiddle
+                          isMiddle(i, paces)
                             ? "text-[#9EE539]"
                             : "text-gray-600"
                         }`}>-</span>
                     <span className={`block text-[14px] absolute top-0 left-2
                       ${
-                        isMiddle
+                        isMiddle(i, paces)
                           ? "text-gray-600"
                           : "text-gray-400"
                       }
@@ -189,13 +186,12 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
                     )}
                   </td>
                   {paces.map((p, j) => {
-                    const isMiddle = j === Math.floor(paces.length / 2);
                     return (
                       <td
                         key={j}
                         className={`
                         border border-gray-400 p-1 text-center
-                        ${isMiddle ? "text-gray-900 bg-[#9EE539] text-[16px]" : ""}
+                        ${isMiddle(j, paces) ? "text-gray-900 bg-[#9EE539] text-[16px]" : ""}
                         ${moreThenTargetSeconds(time / 1000, p * d) ? "bg-red-200 font-bold" : ""}
                         `}
                       >
@@ -210,18 +206,11 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
               <tr className="bg-gray-600">
             <td className="border border-gray-100 p-1 text-gray-200"></td>
             {paces.map((p, i) => {
-              const totalTime = p * distance; // Финальное время для всей дистанции
               return (
                 <th key={i} className="border border-gray-100 py-1 text-gray-200 relative h-6">
-                  {/* <span className={`block text-[14px] absolute top-0 left-2 text-gray-400`}>
-                      {formatTime(totalTime)} 
-                    </span>
-                    <span className="text-[8px] text-gray-600">-</span> */}
                   <span className="absolute bottom-0 right-1 after:content-['/км'] after:text-[10px] after:opacity-55" >
                       {tempFormat(p )}
                     </span>
-                    
-                    
                 </th>
               );
             })}
@@ -232,10 +221,11 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
             {/* Кнопка печати */}
       <div className="flex justify-end pt-4">
         <button
-                onClick={handlePrint}
-                className="mb-2 px-3 py-1 bg-gray-600 text-white rounded hover:bg-[#9EE539] hover:text-gray-600"
-              >
-                🖨️
+          onClick={handlePrint}
+          className="
+            mb-2 px-3 py-1 bg-gray-600 text-white rounded 
+            hover:bg-[#9EE539] hover:text-gray-600"
+             >🖨️
         </button>
       </div>
     </div>

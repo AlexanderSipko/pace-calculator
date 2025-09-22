@@ -104,7 +104,6 @@ export default function PacePlanner() {
       <PaceControls
         distance={distance} setDistance={setDistance}
         customDistance={customDistance} setCustomDistance={setCustomDistance}
-        circle={circle} setCircle={setCircle}
         targetTime={targetTime} setTargetTime={setTargetTime}
         targetPaceMin={targetPaceMin} setTargetPaceMin={setTargetPaceMin}
         targetPaceSec={targetPaceSec} setTargetPaceSec={setTargetPaceSec}
@@ -112,10 +111,8 @@ export default function PacePlanner() {
       />
 
       <div ref={tableRef} className="mt-2 mb-1">
-        <TargetInfo avgPacePerKm={avgPacePerKm} totalSeconds={totalSeconds} distance={distance} mode={mode} />
-        <div className="mt-4">
-          <Stopwatch time={time} setTime={setTime} />
-        </div>
+        <TargetInfo mode={mode} />
+        <Stopwatch time={time} setTime={setTime} />
         <PaceVariationsTable basePaceSec={avgPacePerKm} distance={distance} time={time} />
       </div>
     </div>

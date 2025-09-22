@@ -1,32 +1,14 @@
 // PaceControls.jsx
 import React, { useEffect } from "react";
+import { presets } from './utils'
 
 export default function PaceControls({
   distance, setDistance, customDistance, setCustomDistance,
-  circle, setCircle,
   targetTime, setTargetTime,
   targetPaceMin, setTargetPaceMin,
   targetPaceSec, setTargetPaceSec,
   mode, setMode
 }) {
-  const presets = [
-    { label: "100 м - 1/4 круга", value: 0.1 },
-    { label: "200 м - 1/2 круга", value: 0.2 },
-    { label: "400 м - круг", value: 0.4 },
-    { label: "600 м - 1.5 круга", value: 0.6 },
-    { label: "800 м - 2 круга", value: 0.8 },
-    { label: "1 км - 2.5 круга", value: 1 },
-    { label: "1200 м - 3 круга", value: 1.2 },
-    { label: "1600 м - 1 миля, 4 круга", value: 1.6 },
-    { label: "1800 м - 4.2 круга", value: 1.8 },
-    { label: "2000 м - 5 кругов", value: 2 },
-    { label: "3000 м - 7.5 кругов", value: 3 },
-    { label: "5000 км - 12.5 круга", value: 5 },
-    { label: "6000 км - 15 кругов", value: 6 },
-    { label: "10 км", value: 10 },
-    { label: "Полумарафон 21.097 км", value: 21.097 },
-    { label: "Марафон 42.195 км", value: 42.195 },
-  ];
 
   // Для режима времени — разбор targetTime на часы, минуты, секунды
   const parseTargetTime = () => {
