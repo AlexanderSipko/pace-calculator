@@ -1,0 +1,20 @@
+{
+    "short_name": "paceRUN",
+    "name": "Pace Run Calculator",
+    "icons": [
+      {
+        "src": "/runer-silhouette-running-fast.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/runer-silhouette-running-fast.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff"
+  }
