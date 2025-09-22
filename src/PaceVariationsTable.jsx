@@ -191,7 +191,7 @@ export default function PaceVariationsTable({ basePaceSec, distance, time }) {
                         key={j}
                         className={`
                         border border-gray-400 p-1 text-center
-                        ${isMiddle(j, paces) ? "text-gray-900 bg-[#9EE539] text-[16px]" : ""}
+                        ${isMiddle(j, paces) ? "text-gray-900 bg-[#9EE539] text-[18px]" : ""}
                         ${moreThenTargetSeconds(time / 1000, p * d) ? "bg-red-200 font-bold" : ""}
                         `}
                       >

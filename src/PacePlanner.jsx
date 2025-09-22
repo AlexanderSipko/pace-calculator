@@ -100,7 +100,7 @@ export default function PacePlanner() {
   const avgPacePerKm = (distance > 0) ? totalSeconds / distance : 0;
 
   return (
-    <div className="max-w-3xl mx-auto p-1 space-y-6 text-gray-900 mt-1 mb-1">
+    <div className="max-w-3xl mx-auto p-1 space-y-6 text-gray-900 mt-0 mb-1">
       <PaceControls
         distance={distance} setDistance={setDistance}
         customDistance={customDistance} setCustomDistance={setCustomDistance}
@@ -110,7 +110,7 @@ export default function PacePlanner() {
         mode={mode} setMode={setMode}
       />
 
-      <div ref={tableRef} className="mt-2 mb-1">
+      <div ref={tableRef} className="mt-0 mb-1">
         <TargetInfo mode={mode} />
         <Stopwatch time={time} setTime={setTime} />
         <PaceVariationsTable basePaceSec={avgPacePerKm} distance={distance} time={time} />
