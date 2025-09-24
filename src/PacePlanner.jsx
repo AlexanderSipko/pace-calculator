@@ -4,6 +4,8 @@ import { parseTime, formatTime, calculateSplits, calculateIntervals } from "./ut
 import PaceVariationsTable from "./PaceVariationsTable";
 import TargetInfo from "./TargetInfo";
 import Stopwatch from "./Stopwatch";
+import PrivacyPolicy from "./PrivacyPolicy";
+
 
 export default function PacePlanner() {
   let local_store_suffix = import.meta.env.VITE_MODE
@@ -115,6 +117,7 @@ export default function PacePlanner() {
         <Stopwatch time={time} setTime={setTime} />
         <PaceVariationsTable basePaceSec={avgPacePerKm} distance={distance} time={time} />
       </div>
+      <PrivacyPolicy></PrivacyPolicy>
     </div>
   );
 }
