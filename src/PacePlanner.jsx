@@ -117,7 +117,7 @@ export default function PacePlanner() {
         <Stopwatch time={time} setTime={setTime} />
         <PaceVariationsTable basePaceSec={avgPacePerKm} distance={distance} time={time} />
       </div>
-      <PrivacyPolicy></PrivacyPolicy>
+      {/* <PrivacyPolicy></PrivacyPolicy> */}
     </div>
   );
 }
