@@ -3,8 +3,8 @@
 export const presets = [
   { label: "100 м - 1/4 круга", value: 0.1 },
   { label: "200 м - 1/2 круга", value: 0.2 },
-  { label: "250 м - 0.625 круга", value: 0.25 },
-  { label: "400 м - круг", value: 0.4 },
+  { label: "250 м - круг Шилово", value: 0.25 },
+  { label: "400 м - круг Чайка", value: 0.4 },
   { label: "600 м - 1.5 круга", value: 0.6 },
   { label: "800 м - 2 круга", value: 0.8 },
   { label: "1 км - 2.5 круга", value: 1 },
