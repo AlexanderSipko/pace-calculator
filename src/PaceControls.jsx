@@ -92,7 +92,7 @@ export default function PaceControls({
               ))}
             </select>
             
-          
+            
             {/* Метры */}
             <select
               className="border border-gray-300 rounded-md p-2 w-1/2 focus:ring-2 focus:ring-gray-400"
